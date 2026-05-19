@@ -1,0 +1,13 @@
+---
+---
+
+@import "{{ site.theme }}";
+
+.emoji {
+  vertical-align: middle;
+}
+
+#main-content.post {
+  float: none;
+  width: 100%;
+}
