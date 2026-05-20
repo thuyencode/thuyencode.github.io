@@ -310,6 +310,7 @@ PLATFORMS
 DEPENDENCIES
   erb
   github-pages
+  jekyll-sitemap
   jemoji
 
 CHECKSUMS

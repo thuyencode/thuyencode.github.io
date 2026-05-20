@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Blog
+title: Home
 description: This is where Thuyen Code shares his thoughts
 ---
 
