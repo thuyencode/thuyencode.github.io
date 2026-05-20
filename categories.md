@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Categories
-permalink: /blogs/categories/
+permalink: /categories/
 ---
 
 {% comment %}Collect all unique categories from posts{% endcomment %}

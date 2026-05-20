@@ -1,3 +1,6 @@
+---
+---
+
 @import "{{ site.theme }}";
 
 .emoji {
@@ -7,4 +10,8 @@
 #main-content.post {
   float: none;
   width: 100%;
+}
+
+li {
+  font-size: 16px;
 }

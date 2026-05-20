@@ -4,8 +4,9 @@
     <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}" media="screen" type="text/css">
-    <link rel="stylesheet" href="{{ '/assets/css/print.css' | relative_url }}" media="print" type="text/css">
+    <link rel="preload" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}"></noscript>
+    <link rel="stylesheet" href="{{ '/assets/css/print.css' | relative_url }}" media="print">
 
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -60,7 +61,7 @@
               {% for category in unique_categories %}
                 {% if category != "" %}
                   <li>
-                    <a href="{{ site.baseurl }}/blogs/categories/#{{ category | slugify }}">{{ category }}</a>
+                    <a href="{{ site.baseurl }}/categories/#{{ category | slugify }}">{{ category }}</a>
                   </li>
                 {% endif %}
               {% endfor %}
