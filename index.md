@@ -1,7 +1,6 @@
 ---
 layout: default
 title: Home
-description: This is where Thuyen Code shares his thoughts
 ---
 
 # Posts:

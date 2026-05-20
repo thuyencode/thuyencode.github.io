@@ -9,9 +9,32 @@
 
 #main-content.post {
   float: none;
+  margin: 0 auto;
+}
+
+header.post {
+  padding: 40px;
+}
+
+header.post > .inner {
   width: 100%;
+  max-width: 80rem;
+}
+
+header.post h1,
+header.post h2{
+  max-width: 54rem;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 li {
   font-size: 16px;
+}
+
+@media (width < 48rem) {
+  header.post {
+    padding: 40px 10px;
+  }
 }
