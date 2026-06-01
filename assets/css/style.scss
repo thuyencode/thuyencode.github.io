@@ -33,6 +33,12 @@ li {
   font-size: 16px;
 }
 
+.highlight pre,
+.highlight code {
+  background: transparent;
+}
+
+
 @media (width < 48rem) {
   header.post {
     padding: 40px 10px;
