@@ -10,7 +10,7 @@ TLDR:
 
 - The React fatigue is real and that's why I decided to use SolidJS instead
 - Here I documented some differences between the two and some design patterns
-like reducer, context and refs, with TypeScript of course
+like reducers, contexts and refs, with TypeScript of course
 
 ## Table of Contents
 
