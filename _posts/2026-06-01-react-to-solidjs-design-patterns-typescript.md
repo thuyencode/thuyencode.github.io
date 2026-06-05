@@ -5,7 +5,11 @@ description: React developer tried to learn SolidJS and got fully converted
 date: 2026-06-01
 permalink: /react-to-solidjs-design-patterns-typescript
 categories: react solidjs design-patterns
+image: /public/img/2026-06-01-react-to-solidjs-design-patterns-typescript.webp
 ---
+
+![A cut-scene from Pixar Cars 1 with React logo on Strip Weathers aka The King's head and SolidJS logo on McQueen's head](/public/img/2026-06-01-react-to-solidjs-design-patterns-typescript.webp)
+
 TLDR:
 
 - The React fatigue is real and that's why I decided to use SolidJS instead
