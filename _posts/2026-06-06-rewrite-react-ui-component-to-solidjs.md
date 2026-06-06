@@ -73,7 +73,7 @@ Here we have:
 - A cva object named `buttonStyles` that defines the button's styles.
 - A type alias named `PropsType` to define the component's props.
 - The destructuring assignment that the component uses to get the specific props
-it needs from the props parameter for styling.
+  it needs from the props parameter for styling.
 
 Let me show you how to translate those to SolidJS.
 
@@ -114,7 +114,7 @@ We can't copy the code that Tailgrids provides since props destructuring will br
 reactivity in SolidJS. We must use `splitProps` to partition the props parameter.
 I name the parameter the component take as `_props` to tell that we do not use it
 directly. Specify the specific styling props as an array for the second argument
-of `splitProps`
+of `splitProps`.
 
 ```tsx
 import { splitProps, type ComponentProps } from "solid-js";
@@ -285,7 +285,7 @@ export type ButtonProps<T extends ValidComponent> = BaseButtonProps<T> &
 The `Button` component takes a type argument `T` extending from `ValidComponent`
 as well, but we assign `button` as default type to it.
 
-SolidJS has a special component called `Dynamic`. I won't explain it here 
+SolidJS has a special component called `Dynamic`. I won't explain it here
 since the blog post is quite lengthy already, and the docs would explain
 it better [^4].
 
