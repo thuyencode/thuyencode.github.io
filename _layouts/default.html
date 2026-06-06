@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+a<!DOCTYPE html>
 <html lang="{{ site.lang | default: "en-US" }}">
   <head>
     <meta charset='utf-8'>
@@ -40,35 +40,47 @@
         </main>
 
         <aside id="sidebar">
-          <h1>Categories</h1>
-          {% assign all_categories = "" %}
-
-          {% for post in site.posts %}
-            {% if post.categories %}
-              {% assign raw_categories = post.categories | join: " " %}
-              {% assign clean_categories = raw_categories | replace: "[", "" | replace: "]", "" | replace: '"', "" %}
-              {% assign category_array = clean_categories | split: " " %}
-              {% for category in category_array %}
-                {% assign all_categories = all_categories | append: category | append: "," %}
-              {% endfor %}
-            {% endif %}
-          {% endfor %}
-
-          {% assign unique_categories = all_categories | split: "," | uniq | sort %}
-
-          {% if unique_categories.size > 0 %}
+          <section>
+            <h2>Contact</h2>
             <ul>
-              {% for category in unique_categories %}
-                {% if category != "" %}
-                  <li>
-                    <a href="{{ site.baseurl }}/categories/#{{ category | slugify }}">{{ category }}</a>
-                  </li>
-                {% endif %}
-              {% endfor %}
+              <li>Homepage: <a href="https://thuyencode.com">thuyencode.com</a></li>
+              <li>Email: <a href="mailto:thuyencode@proton.me">thuyencode@proton.me</a></li>
+              <li>LinkedIn: <a href="https://www.linkedin.com/in/thuyencode/">Tran Van Thuyen</a></li>
+              <li>Facebook: <a href="https://www.facebook.com/tran.van.thuyen.648991/">Tran Van Thuyen</a></li>
             </ul>
-          {% else %}
-            <p>No categories yet.</p>
-          {% endif %}
+          </section>
+
+          <section>
+            <h2>Categories</h2>
+            {% assign all_categories = "" %}
+
+            {% for post in site.posts %}
+              {% if post.categories %}
+                {% assign raw_categories = post.categories | join: " " %}
+                {% assign clean_categories = raw_categories | replace: "[", "" | replace: "]", "" | replace: '"', "" %}
+                {% assign category_array = clean_categories | split: " " %}
+                {% for category in category_array %}
+                  {% assign all_categories = all_categories | append: category | append: "," %}
+                {% endfor %}
+              {% endif %}
+            {% endfor %}
+
+            {% assign unique_categories = all_categories | split: "," | uniq | sort %}
+
+            {% if unique_categories.size > 0 %}
+              <ul>
+                {% for category in unique_categories %}
+                  {% if category != "" %}
+                    <li>
+                      <a href="{{ site.baseurl }}/categories/#{{ category | slugify }}">{{ category }}</a>
+                    </li>
+                  {% endif %}
+                {% endfor %}
+              </ul>
+            {% else %}
+              <p>No categories yet.</p>
+            {% endif %}
+          </section>
         </aside>
       </div>
     </div>
