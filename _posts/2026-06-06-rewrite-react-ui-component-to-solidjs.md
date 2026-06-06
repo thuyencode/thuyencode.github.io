@@ -251,9 +251,10 @@ If you want a production-grade solution, Kobalte has a documentation about
 polymorphism with the `as` prop [^2]. Ark UI has a documentation about
 composition with the `asChild` prop [^3]. Worth a read!
 
-If you want to implement the `as` prop yourself and feel like a senior, read this!
+If you want to implement the `as` prop yourself and feel like a senior,
+follow me in the next step.
 
-### Step 1: Define the polymorphic props type
+### Step 4: Define the polymorphic props type
 
 Let's replace `ButtonStyleProps` with `BaseButtonProps`. It takes
 a type argument named `T` extending `ValidComponent`. `ValidComponent`'s
@@ -280,10 +281,10 @@ export type ButtonProps<T extends ValidComponent> = BaseButtonProps<T> &
 // ...
 ```
 
-### Step 2: Implement the polymorphic behavior
+### Step 5: Implement the polymorphic behavior
 
 The `Button` component takes a type argument `T` extending from `ValidComponent`
-as well, but we assign `button` as default type to it.
+as well, but we assign `"button"` as default type to it.
 
 SolidJS has a special component called `Dynamic`. I won't explain it here
 since the blog post is quite lengthy already, and the docs would explain
@@ -291,7 +292,7 @@ it better [^4].
 
 Partition the specific props in `BaseButtonProps` with `splitProps`,
 and use `Dynamic` component to render the component specified in `props.as`.
-`as` can be nullish, in which case `button` is used as the default.
+`as` can be nullish, in which case `"button"` is used as the default.
 
 And `type="button"` is removed since the rendered HTML is not necessarily a button.
 
