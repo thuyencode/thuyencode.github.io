@@ -6,6 +6,7 @@ date: 2026-05-20
 permalink: /why-my-last-side-project-failed/
 categories: rant
 ---
+
 TLDR:
 
 - The side project failed due to the lack of planning, unforeseen technical

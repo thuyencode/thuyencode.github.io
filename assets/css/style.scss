@@ -22,7 +22,7 @@ header.post > .inner {
 }
 
 header.post h1,
-header.post h2{
+header.post h2 {
   max-width: 54rem;
   width: 100%;
   margin-left: auto;
@@ -37,7 +37,6 @@ li {
 .highlight code {
   background: transparent;
 }
-
 
 @media (width < 48rem) {
   header.post {

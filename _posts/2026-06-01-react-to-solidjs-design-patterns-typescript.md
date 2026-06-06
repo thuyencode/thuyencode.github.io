@@ -5,16 +5,16 @@ description: React developer tried to learn SolidJS and got fully converted
 date: 2026-06-01
 permalink: /react-to-solidjs-design-patterns-typescript
 categories: react solidjs design-patterns
-image: /public/img/2026-06-01-react-to-solidjs-design-patterns-typescript.webp
+image: /assets/img/2026-06-01-react-to-solidjs-design-patterns-typescript.webp
 ---
 
-![A cut-scene from Pixar Cars 1 with React logo on Strip Weathers aka The King's head and SolidJS logo on McQueen's head](/public/img/2026-06-01-react-to-solidjs-design-patterns-typescript.webp)
+![A cut-scene from Pixar Cars 1 with React logo on Strip Weathers aka The King's head and SolidJS logo on McQueen's head](assets/img/2026-06-01-react-to-solidjs-design-patterns-typescript.webp)
 
 TLDR:
 
 - The React fatigue is real and that's why I decided to use SolidJS instead
 - Here I documented some differences between the two and some design patterns
-like reducers, contexts and refs, with TypeScript of course
+  like reducers, contexts and refs, with TypeScript of course
 
 ## Table of Contents
 
@@ -101,41 +101,33 @@ You can simply call `props.name`.
 ### Simple state management
 
 In React, to add state to your component, you need the `useState` hook.
-In SolidJS,  you call the `createSignal` function.
+In SolidJS, you call the `createSignal` function.
 
 React:
 
 ```tsx
-import { useState } from 'react';
+import { useState } from "react";
 
 function MyButton() {
   const [count, setCount] = useState(0);
 
   const increment = () => setCount(count + 1);
 
-  return (
-    <button onClick={increment}>
-      Clicked {count} times
-    </button>
-  );
+  return <button onClick={increment}>Clicked {count} times</button>;
 }
 ```
 
 SolidJS:
 
 ```tsx
-import { createSignal } from 'solid-js';
+import { createSignal } from "solid-js";
 
 function MyButton() {
   const [count, setCount] = createSignal(0);
 
   const increment = () => setCount(count() + 1);
 
-  return (
-    <button onClick={increment}>
-      Clicked {count()} times
-    </button>
-  );
+  return <button onClick={increment}>Clicked {count()} times</button>;
 }
 ```
 
@@ -152,46 +144,46 @@ The setter functions work the same way in both.
 React:
 
 ```tsx
-import { useState, createContext, type PropsWithChildren } from 'react';
+import { useState, createContext, type PropsWithChildren } from "react";
 
 interface User {
-  name: string
-  username: string
+  name: string;
+  username: string;
 }
 
 interface Auth {
-  user: User | null
-  accessToken: string | null
+  user: User | null;
+  accessToken: string | null;
 }
 
 interface AuthContextValue extends Auth {
-  setUser: (user: Auth['user']) => void
-  setAccessToken: (accessToken: Auth['accessToken']) => void
+  setUser: (user: Auth["user"]) => void;
+  setAccessToken: (accessToken: Auth["accessToken"]) => void;
 }
 
-export const AuthContext = createContext<AuthContextValue | undefined>(undefined);
+export const AuthContext = createContext<AuthContextValue | undefined>(
+  undefined,
+);
 
-type AuthProviderProps = Partial<Auth>
+type AuthProviderProps = Partial<Auth>;
 
-export function AuthProvider({ children, user, accessToken }:
-  PropsWithChildren<AuthProviderProps>) {
+export function AuthProvider({
+  children,
+  user,
+  accessToken,
+}: PropsWithChildren<AuthProviderProps>) {
   const [auth, setAuth] = useState<Auth>({
     user: user ?? null,
     accessToken: accessToken ?? null,
   });
 
-  
   const value: AuthContextValue = {
     ...auth,
     setUser: (user) => setAuth({ ...auth, user }),
-    setAccessToken: (accessToken) => setAuth({ ...auth, accessToken })
+    setAccessToken: (accessToken) => setAuth({ ...auth, accessToken }),
   };
 
-  return (
-    <AuthContext value={value}>
-      {children}
-    </AuthContext>
-  );
+  return <AuthContext value={value}>{children}</AuthContext>;
 }
 ```
 
@@ -207,27 +199,32 @@ doesn't need any of those?
 SolidJS:
 
 ```tsx
-import { createContext, type ParentProps } from 'solid-js';
-import { createStore } from 'solid-js/store';
+import { createContext, type ParentProps } from "solid-js";
+import { createStore } from "solid-js/store";
 
 interface User {
-  name: string
-  username: string
+  name: string;
+  username: string;
 }
 
 interface Auth {
-  user: User | null
-  accessToken: string | null
+  user: User | null;
+  accessToken: string | null;
 }
 
-type AuthContextValue = [Auth, {
-  setUser: (user: Auth['user']) => void
-  setAccessToken: (accessToken: Auth['accessToken']) => void
-}]
+type AuthContextValue = [
+  Auth,
+  {
+    setUser: (user: Auth["user"]) => void;
+    setAccessToken: (accessToken: Auth["accessToken"]) => void;
+  },
+];
 
-export const AuthContext = createContext<AuthContextValue | undefined>(undefined);
+export const AuthContext = createContext<AuthContextValue | undefined>(
+  undefined,
+);
 
-type AuthProviderProps = Partial<Auth>
+type AuthProviderProps = Partial<Auth>;
 
 export function AuthProvider(props: ParentProps<AuthProviderProps>) {
   const [auth, setAuth] = createStore<Auth>({
@@ -235,16 +232,16 @@ export function AuthProvider(props: ParentProps<AuthProviderProps>) {
     accessToken: props.accessToken ?? null,
   });
 
-  
-  const value: AuthContextValue = [auth, {
-    setUser: (user) => setAuth('user', user),
-    setAccessToken: (accessToken) => setAuth('accessToken', accessToken)
-  }]
+  const value: AuthContextValue = [
+    auth,
+    {
+      setUser: (user) => setAuth("user", user),
+      setAccessToken: (accessToken) => setAuth("accessToken", accessToken),
+    },
+  ];
 
   return (
-    <AuthContext.Provider value={value}>
-      {props.children}
-    </AuthContext.Provider>
+    <AuthContext.Provider value={value}>{props.children}</AuthContext.Provider>
   );
 }
 ```
@@ -255,17 +252,15 @@ so the `value` variable is a stable reference.
 And any changes to any property of `auth` will be written directly in the DOM.
 
 ```tsx
-import { useContext, Show } from 'solid-js';
-import { AuthContext } from '...'
+import { useContext, Show } from "solid-js";
+import { AuthContext } from "...";
 
 function UserBadge() {
   const [auth] = useContext(AuthContext);
 
   return (
-    <Show when={auth.user}>
-      {(user) => <span>@{user.username}</span>}
-    </Show>
-  )
+    <Show when={auth.user}>{(user) => <span>@{user.username}</span>}</Show>
+  );
 }
 ```
 
@@ -273,29 +268,31 @@ If you want to use the reducer pattern with contexts in SolidJS, while
 it doesn't have a `createReducer` function, you can do this:
 
 ```tsx
-import { createContext, type ParentProps } from 'solid-js';
-import { createStore } from 'solid-js/store';
+import { createContext, type ParentProps } from "solid-js";
+import { createStore } from "solid-js/store";
 
 interface User {
-  name: string
-  username: string
+  name: string;
+  username: string;
 }
 
 interface Auth {
-  user: User | null
-  accessToken: string | null
+  user: User | null;
+  accessToken: string | null;
 }
 
-type AuthAction = 
-  { type: 'set_name', name: User['name'] } |
-  { type: 'set_username', username: User['username'] } |
-  { type: 'set_access_token', accessToken: Auth['accessToken'] }
+type AuthAction =
+  | { type: "set_name"; name: User["name"] }
+  | { type: "set_username"; username: User["username"] }
+  | { type: "set_access_token"; accessToken: Auth["accessToken"] };
 
-type AuthContextValue = [Auth, dispatch: (action: AuthAction) => void]
+type AuthContextValue = [Auth, dispatch: (action: AuthAction) => void];
 
-export const AuthContext = createContext<AuthContextValue | undefined>(undefined);
+export const AuthContext = createContext<AuthContextValue | undefined>(
+  undefined,
+);
 
-type AuthProviderProps = Partial<Auth>
+type AuthProviderProps = Partial<Auth>;
 
 export function AuthProvider(props: ParentProps<AuthProviderProps>) {
   const [auth, setAuth] = createStore<Auth>({
@@ -303,26 +300,25 @@ export function AuthProvider(props: ParentProps<AuthProviderProps>) {
     accessToken: props.accessToken ?? null,
   });
 
-  
-  const value: AuthContextValue = [auth,
+  const value: AuthContextValue = [
+    auth,
     function dispatch(action) {
       switch (action.type) {
-        case 'set_name':
-          setAuth('user', { ...auth.user!, name: action.name });
+        case "set_name":
+          setAuth("user", { ...auth.user!, name: action.name });
           break;
-        case 'set_username':
-          setAuth('user', { ...auth.user!, username: action.username });
+        case "set_username":
+          setAuth("user", { ...auth.user!, username: action.username });
           break;
-        case 'set_access_token':
-          setAuth('accessToken', action.accessToken);
+        case "set_access_token":
+          setAuth("accessToken", action.accessToken);
           break;
       }
-    }]
+    },
+  ];
 
   return (
-    <AuthContext.Provider value={value}>
-      {props.children}
-    </AuthContext.Provider>
+    <AuthContext.Provider value={value}>{props.children}</AuthContext.Provider>
   );
 }
 ```
@@ -337,11 +333,11 @@ You must be familiar with declaring a ref in React using the `useRef` hook.
 An escape hatch from React's component lifecycle.
 
 ```tsx
-import { useRef } from 'react'
+import { useRef } from "react";
 
 function Canvas() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  
+
   return (
     <div>
       <canvas ref={canvasRef} />
@@ -355,8 +351,8 @@ a regular, non-constant variable.
 
 ```tsx
 function Canvas() {
-  let canvasRef: HTMLCanvasElement | undefined
-  
+  let canvasRef: HTMLCanvasElement | undefined;
+
   return (
     <div>
       <canvas ref={canvasRef} />
@@ -387,7 +383,7 @@ function Canvas() {
   onCleanup(() => {
     canvas()?.dispose();
   });
-    
+
   return (
     <div>
       <canvas ref={setCanvasRef} />
@@ -414,6 +410,9 @@ More deep dive in [SolidJS Documentation: Fine-grained reactivity](https://docs.
 ## References
 
 [^1]: [SolidJS Documentation: Intro to reactivity](https://docs.solidjs.com/concepts/intro-to-reactivity#updating-the-ui)
+
 [^2]: [SolidJS Documentation: Props](https://docs.solidjs.com/concepts/components/props)
+
 [^3]: [SolidJS Documentation: createSignal](https://docs.solidjs.com/reference/basic-reactivity/create-signal#return-value)
+
 [^4]: [SolidJS Documentation: Stores](https://docs.solidjs.com/concepts/stores#creating-a-store)
