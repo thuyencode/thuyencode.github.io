@@ -7,9 +7,8 @@
   vertical-align: middle;
 }
 
-#main-content.post {
-  margin: 0 auto;
-  padding-left: 10px;
+header .inner {
+  max-width: 1000px;
 }
 
 header.post h1,
@@ -32,13 +31,18 @@ li {
 aside#sidebar {
   width: 250px;
   position: sticky;
-  top: 0
+  top: 0;
 }
 
 .inner {
   width: 100%;
   max-width: 70rem;
   position: relative;
+  margin: 0 auto;
+}
+
+.inner:not(.post) {
+  padding: 0 10px;
 }
 
 .mobile-toc {
@@ -48,10 +52,6 @@ aside#sidebar {
 @media (width < 48rem) {
   header.post {
     padding: 40px 10px;
-  }
-
-  .post {
-    padding: 0px 10px;
   }
 
   .desktop-toc {
