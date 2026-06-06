@@ -50,8 +50,18 @@
             </p>
           {% endif %}
 
+          <section class="mobile-toc">
+            <h2>Table of contents</h2>
+
+            {% include toc.html html=content %}
+          </section>
+
           {{ content }}
 
+          <a href="/">Read more posts.</a>
+        </main>
+
+        <aside id="sidebar">
           <section>
             <h2>Contact</h2>
             <ul>
@@ -62,8 +72,12 @@
             </ul>
           </section>
 
-          <a href="/">Read more posts.</a>
-        </main>
+          <section class="desktop-toc">
+            <h2>Table of contents</h2>
+
+            {% include toc.html html=content %}
+          </section>
+        </aside>
       </div>
     </div>
 

@@ -8,17 +8,8 @@
 }
 
 #main-content.post {
-  float: none;
   margin: 0 auto;
-}
-
-header.post {
-  padding: 40px;
-}
-
-header.post > .inner {
-  width: 100%;
-  max-width: 80rem;
+  padding-left: 10px;
 }
 
 header.post h1,
@@ -40,15 +31,34 @@ li {
 
 aside#sidebar {
   width: 250px;
+  position: sticky;
+  top: 0
 }
 
-div.inner {
+.inner {
   width: 100%;
   max-width: 70rem;
+  position: relative;
+}
+
+.mobile-toc {
+  display: none;
 }
 
 @media (width < 48rem) {
   header.post {
     padding: 40px 10px;
+  }
+
+  .post {
+    padding: 0px 10px;
+  }
+
+  .desktop-toc {
+    display: none;
+  }
+
+  .mobile-toc {
+    display: block;
   }
 }

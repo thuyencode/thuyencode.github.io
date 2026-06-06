@@ -16,18 +16,6 @@ TLDR:
 - Here I documented some differences between the two and some design patterns
   like reducers, contexts and refs, with TypeScript of course
 
-## Table of Contents
-
-- [Intro](#intro)
-- [Noticeable Differences](#noticeable-differences)
-  - [Better Performance in SolidJS](#better-performance-in-solidjs)
-  - [No Props Destructuring](#no-props-destructuring-in-solidjs)
-  - [Simple State Management](#simple-state-management)
-  - [Complex State with Contexts](#complex-state-management-and-dependencies-injection-with-contexts)
-  - [Refs](#refs)
-- [Postscript](#postscript)
-- [References](#references)
-
 ## Intro
 
 I originally planned to update the progress of planning and making my next
